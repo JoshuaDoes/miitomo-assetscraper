@@ -197,7 +197,7 @@ func isCompletedDownload(asset string) bool {
 func addCompletedDownload(asset string) {
 	completedDownloads.Assets = append(completedDownloads.Assets, asset)
 	completedDownloadsJSON, _ := json.MarshalIndent(completedDownloads, "", "\t")
-	_ = ioutil.WriteFile("state.dat", completedDownloadsJSON, 644)
+	_ = ioutil.WriteFile("state.dat", completedDownloadsJSON, 0644)
 }
 
 func getDots(assetName string, longestAssetName int) string {
@@ -253,7 +253,7 @@ func fileDownload(url, location string) (string, string, error) {
 
 func mkdir(dir string) error {
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		err = os.MkdirAll(dir, 777)
+		err = os.MkdirAll(dir, 0777)
 		if err != nil {
 			return err
 		}
